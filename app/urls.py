@@ -1,5 +1,17 @@
 
 # coding: utf-8
+
+from django.urls import path
+from .views import TestOne
+
+urlpatterns = [
+    path('testone/<str:message>', TestOne.as_view(), name='testOne')
+]
+
+
+
+'''
+# coding: utf-8
 # from django.conf.urls import url
 # same as from django.urls import path
 from django.urls import path
@@ -15,3 +27,4 @@ from .views import Index
 urlpatterns = [
     path('index/<str:name>/<str:gender>', Index.as_view())
 ]
+'''

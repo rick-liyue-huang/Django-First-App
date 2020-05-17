@@ -1,4 +1,27 @@
 
+# creating views here
+
+# coding: utf-8
+
+from django.views.generic import View
+from django.http import HttpResponse
+
+
+'''
+class TestOne(View):
+    def get(self, request):
+        message = request.GET.get('message', 'no content')
+        return HttpResponse(message)
+'''
+
+
+class TestOne(View):
+    
+    def get(self, request, message):
+        return HttpResponse(message)
+
+
+'''
 # coding: utf-8
 
 from django.http import HttpResponse
@@ -22,3 +45,4 @@ class Index(View):
     def get(self, request, name, gender):
         print(dir(request))
         return HttpResponse("Hi, I'm {}, and I'm {}".format(name, gender))
+'''
