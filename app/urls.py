@@ -2,12 +2,17 @@
 # coding: utf-8
 
 from django.urls import path
-from .views import TestOne
+# from .views import TestOne
+from .views import Index
+
 
 urlpatterns = [
-    path('testone/<str:message>', TestOne.as_view(), name='testOne')
+    path('<str:gender>', Index.as_view(), name='index')
 ]
 
+# urlpatterns = [
+#     path('testone/<str:message>', TestOne.as_view(), name='testOne')
+# ]
 
 
 '''

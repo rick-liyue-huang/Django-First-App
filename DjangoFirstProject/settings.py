@@ -55,7 +55,8 @@ ROOT_URLCONF = 'DjangoFirstProject.urls'  # 所有路由的根路由
 TEMPLATES = [   # 静态文件的配置
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # 定义模板的位置
+        # 定义模板的位置 类似于 /usr/xxx/projectname/templates
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

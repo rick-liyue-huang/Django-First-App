@@ -4,7 +4,15 @@
 # coding: utf-8
 
 from django.views.generic import View
+from django.shortcuts import render
 from django.http import HttpResponse
+
+
+class Index(View):
+    TEMPLATE = 'index.html'
+
+    def get(self, request, gender):
+        return render(request, self.TEMPLATE, {'name': 'rick', 'gender': gender})
 
 
 '''
@@ -15,10 +23,10 @@ class TestOne(View):
 '''
 
 
-class TestOne(View):
-    
-    def get(self, request, message):
-        return HttpResponse(message)
+# class TestOne(View):
+
+#     def get(self, request, message):
+#         return HttpResponse(message)
 
 
 '''

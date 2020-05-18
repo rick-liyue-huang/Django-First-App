@@ -111,3 +111,7 @@ class Test(View):
 10. Get 获取资源的时候使用，比如我们查看一个网页，Post 提交资源的时候使用，比如我么注册一个用户的时候，Put 修改资源的时候，比如我么修改自己的用户信息，Delete 删除资源的时候使用，比如我么注销我们的账号的时候。
 11. HTTP 是无状态的，当浏览器发送请求给服务器的时候，服务器响应客户端请求，但是当同一个浏览器再次发给服务器发送请求的时候，服务器并不知奥它就是刚才那个浏览器，简单的说服务器不记得浏览器所以就是无状态的。
 12. 200 成功， 400 请求错误，一般是参数格式有错误，403 禁止访问，404 没有获取到 URL 地址， 405 方法禁用，比如这个地址指定用 get 方法，但是使用了 post 方法， 500 服务器异常
+
+### Template 模板
+
+模板可以动态生成 HTML 网页，它包括部分 HTML 代码和一些特殊的语法。一般 template 模板存放在'templae'目录中，通过在项目 Settings 的 templates 的 DIRS 列表中添加对应的路径即可，如 `os.path.join(BASE_DIR, 'template')` 。 通过 `from django.shorcuts import render` 模块，`return render(request, template_path, {k:v})` 字典中的 key 和 value 就是要向前端渲染出的数据。在 HTML 中以{{}} 为标识，在{{}}中传入视图中的数据就可以了。
