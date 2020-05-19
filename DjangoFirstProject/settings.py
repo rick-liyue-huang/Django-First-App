@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # 'app',  # 注册自定义创建的应用
     'jinja2app', # 注册 jinja2 应用
     'makoapp', # 注册 mako 应用
+    'templateEnumMessageApp',
+    'templateEnumMessageApp.templatetags'  # 加入自定义filter
 ]
 
 MIDDLEWARE = [  # 中间件
@@ -88,10 +90,24 @@ TEMPLATES = [   # 静态文件的配置
     #     },
     # },
     # 单独配置 mako 的模板
+    # {
+    #     'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    #     # 定义模板的位置 类似于 /usr/xxx/projectname/templates
+    #     'DIRS': [os.path.join(BASE_DIR, 'mako-templates')],
+    #     'APP_DIRS': True,
+    #     'OPTIONS': {
+    #         'context_processors': [
+    #             'django.template.context_processors.debug',
+    #             'django.template.context_processors.request',
+    #             'django.contrib.auth.context_processors.auth',
+    #             'django.contrib.messages.context_processors.messages',
+    #         ],
+    #     },
+    # },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 定义模板的位置 类似于 /usr/xxx/projectname/templates
-        'DIRS': [os.path.join(BASE_DIR, 'mako-templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'message-templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

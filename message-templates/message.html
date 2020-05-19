@@ -1,0 +1,18 @@
+{% load custom %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% if error %}
+  <h3>error: {{error}} </h3>
+  {% else %}
+  <label for="" style="color:{{message_type.color}}">{{message_type.label}}: </label>
+  <span style="color:{{message_type.color}}"> {{message|deep_check_message|add_message_year:2020}} </span>
+  {% endif %}
+</body>
+</html>

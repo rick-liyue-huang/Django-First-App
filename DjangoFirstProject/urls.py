@@ -19,12 +19,14 @@ from django.urls import path, include
 from app import urls as app_urls
 from jinja2app.views import test
 from makoapp.views import Test
+from templateEnumMessageApp import urls as app_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include(app_urls)),
     # path('test/', test)
-    path('test/', Test.as_view())
+    # path('test/', Test.as_view())
+    path('', include(app_urls))
 ]
 
 
