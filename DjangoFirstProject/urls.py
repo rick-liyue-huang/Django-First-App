@@ -17,8 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from app import urls as app_urls
+from jinja2app.views import test
+from makoapp.views import Test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(app_urls))
+    # path('', include(app_urls)),
+    # path('test/', test)
+    path('test/', Test.as_view())
 ]
+
+

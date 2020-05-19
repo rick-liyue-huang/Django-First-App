@@ -7,7 +7,7 @@ from .views import Index
 
 
 urlpatterns = [
-    path('<str:gender>', Index.as_view(), name='index')
+    path('<str:name>', Index.as_view(), name='index')
 ]
 
 # urlpatterns = [

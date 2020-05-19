@@ -1,11 +1,69 @@
+{% extends 'base.html' %} {% load static %} {% load my_filter %} {% block css_style %}
+<link rel="stylesheet" href="{% static 'index.css' %}" />
+{% endblock %} {% block title %} test {% endblock %} {% block content%}
+<h1>hello Django2</h1>
+<ul>
+  {% for item in array%}
+  <li>{{item}}</li>
+  {% endfor %}
+</ul>
+
+<br />
+
+<label>add: </label>{{count|add:20}} <br />
+<label>date: </label>{{time|date:'Y-m-d H:i:s'}} <br />
+<label>cut: </label>{{cut_str|cut:' '}} <br />
+<label for="">capfirst: </label> {{first_big|capfirst}} <br />
+<label for="">default: </label>{{result|default:'null'}} <br />
+<label for="">default_is_none: </label> {{result1|default_if_none:'none'}}
+<br />
+<label for="">dictsort: </label>{{dict_list|dictsort:'age'}} <br />
+<label for="">dictsortreversed: </label> {{dict_list|dictsortreversed:'age'}}
+<label for="">first: </label> {{dict_list|first}}
+<label for="">last: </label> {{dict_list|last}}
+<label for="">floatformat: </label> {{float_num|floatformat:2}}
+<br />
+<label for="">join: </label>{{array|join:'-'}} <br />
+<label for="">length: </label>{{dict_list|length}} <br />
+<label for="">divisibleby: </label>{{count|divisibleby:3}} <br />
+<label for="">length_is: </label>{{dict_list|length_is:1}} <br />
+<label for="">safe: </label>{{html_str|safe}} <br />
+<label for="">random: </label>{{dict_list|random}} <br />
+<label for="">slice: </label>{{html_str|slice:'15'}} <br />
+<label for="">slugify: </label>{{html_str|slugify}} <br />
+<label for="">upper: </label>{{html_str|upper}} <br />
+<label for="">urlize: </label>{{a_str|urlize}} <br />
+<label for="">wordcount: </label> {{first_big|wordcount}} <br />
+<label for="">timeuntil: </label> {{future|timeuntil}} <br />
+<label for="">custom: </label> {{count|test:2}} <br />
+{% endblock %}
+
+
+<!-- {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}" />
   </head>
   <body>
     hello django template -- {{name}} -- {{gender}}
+    <ul>
+      {% for item in array %}
+      <li>
+        {{item}} - {{forloop.counter0}} - {{forloop.counter}} -
+        {{forloop.revcounter}} - {{forloop.revcounter0}} {% if forloop.first %}
+        is first {% elif forloop.last %} is last {% endif %}
+      </li>
+      {% empty %}
+      <li>
+        is empty
+      </li>
+      {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' 'conan' %}">return</a>
   </body>
-</html>
+</html> -->

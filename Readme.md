@@ -115,3 +115,83 @@ class Test(View):
 ### Template 模板
 
 模板可以动态生成 HTML 网页，它包括部分 HTML 代码和一些特殊的语法。一般 template 模板存放在'templae'目录中，通过在项目 Settings 的 templates 的 DIRS 列表中添加对应的路径即可，如 `os.path.join(BASE_DIR, 'template')` 。 通过 `from django.shorcuts import render` 模块，`return render(request, template_path, {k:v})` 字典中的 key 和 value 就是要向前端渲染出的数据。在 HTML 中以{{}} 为标识，在{{}}中传入视图中的数据就可以了。
+
+#### Template 内置标签和静态文件配置
+
+1. 变量用 {{}} 包裹，比如我么后端渲染过来的数据，用 {{name}}
+2. 内置标签类型，用 {% %}
+
+```
+{% for %} {% endfor %}   # 遍历输出内容
+{% if %} {% elif %} {% endif %}  # 对变量条件判断
+{% url name args %} # 引用路由配置名
+{% load %} # 加载 django标签库
+{% load static %}
+{% static static_path %}  # 读取静态资源
+{% extends base_template %} # 模板继承
+{% block data %} {% endblock %} # 重写父模板代码
+{% csrf_token %} # 跨域的密钥
+```
+
+3. for 标签模板
+
+```
+forloop.counter # 从1开始计算获取当前的索引
+forloop.counter0 # 从0开始计算获取当前的索引
+forloop.revcounter # 索引从最大到1
+forloop.revcounter0 # 搜因从最大到0
+forloop.first # 当前元素是否是第一个
+forloop.last # 当前元素是否是最后一个
+empty # 为空的情况
+```
+
+4. 静态文件的配置是：项目根目录创建 'static' 与 'template' 同级，`STATICFILES_DIRS=(os.path.join(BASE_DIR), 'static',)`，静态文件包括 css 文件，JS 文件，Image 文件
+5. 在实际的开发中可以使用'base.html'作为基础模板来处理整个布局以及使用 block 来空出来要添加的信息，然后让其他的模板通过`{% extends 'base.html' %}`来继承这个模板.并且在相应的位置添加实际的代码，这里需要保持 block 名称的一致。
+
+#### 模板内置过滤器
+
+1. 用于在 HTML 模板中，对于渲染过来的数据进行二次操作使用，过滤器其实就是用来处理这些数据的模板引擎中使用的函数。也就是在前端使用 Python 的语言，就需要有过滤器。
+
+```
+# 常用的过滤器介绍
+add {{value|add"10}} # value 加10
+date {{value|date:"Y-m-d H:i:s"}} # 把日期格式按照规定的形式显示
+cut {{value|cut:'xx'}} # 删掉 value中的xx
+capfirst {{value|capfirst}} # value首字母大写
+default {{value|default:'xx'}} # 值为false时候使用默认值
+default_if_none {{value|default_if_none:'xx'}} 值为空时候使用默认值
+dictsort {{value|dictsort:'key'}} # 值为字典的列表，按照key排序
+dictsortreversed {{value|dictsortreversed:'key'}} # 上边方法反序
+frist {{value|first}} # 返回列表中的第一个索引值
+floatformat {{value|floatvalue:2}} # 保留小数点2位
+join {{value|join:'xx'}} # 类似于 'xx'.join(value)
+last {{value|last}} # 返回列表的最后索引值
+length {{value|length}} # 返回值的长度
+divisibleby {{value|divisibleby:2}} # 如果可以被2整除就返回true
+length_is {{value|length_is:'2'}} # 如果长度是2就返回true
+safe {{value|safe}} # 将字符串中的html在前端安全显示
+random {{value|random}} # 随机列表中的一个值
+slice {{value|slice:'2'}} # 截取前两个字符
+slugify {{value|slugify}} # 值小写，单词用-分割
+upper {{value|upper}} # 字符串大写
+urlize {{value|urlize}} # 字符串中连接可点击
+wordcount {{value|wordcount}} # 字符串中单词数目
+timeuntil {{value|timeuntil}} # 距离当前日期的天数和小时数
+```
+
+2. 自定义过滤函数：在 Django 服务器端编写函数，在模板中可以直接调用过滤器函数，在应用下创建 templatetags 文件夹，在文件夹下创建 myfilter.py 文件
+
+```
+from django import template
+register = template.Library() # 定义过滤器
+@register.filter
+def test_filter(value, args):
+  return value + args
+
+{% load myfilter %}
+{{data|test_filter:3}}
+```
+3. Jinja2 是一套模仿Django模板的模板引擎，由Flask开发，提倡html和Python开发工作分离。
+4. Mako 模板可以在HTML中随意书写Python代码
+5. 需要单独在setting.py中配置jinja2的模板配置环境。同时不需要 `{% load static %} {% load my_filter %}` 因为已经在base.py中配置了 'myfilter'。
+6. 对于mako需要在应用中配置 'base_render.py'来处理模板的的设置

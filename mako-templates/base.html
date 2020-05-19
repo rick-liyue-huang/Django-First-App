@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${self.title()}</title>
+  <link rel="stylesheet" href="${self.css()}">
+</head>
+<body>
+  ${self.content()}
+  ${self.js()}
+</body>
+</html>
+
+<%def name="title()"></%def>
+<%def name="content()">
+  ${self.main()}
+</%def>
+<%def name="main()"></%def>
+<%def name="js()"></%def>
+<%def name="css()"></%def>

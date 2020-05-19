@@ -25,6 +25,7 @@ SECRET_KEY = '_t33jvarcfz^6w#!o3fx-*)y1n(6hu82*a9xd6u1@q7q0*lye5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# 允许任意URL和端口
 ALLOWED_HOSTS = ['*']
 
 
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',  # 记录会话系统，标识当前访问网站的用户身份的
     'django.contrib.messages',  # 信息功能
     'django.contrib.staticfiles',  # 静态资源 比如 CSS
-    'app'  # 注册自定义创建的应用
+    # 'app',  # 注册自定义创建的应用
+    'jinja2app', # 注册 jinja2 应用
+    'makoapp', # 注册 mako 应用
 ]
 
 MIDDLEWARE = [  # 中间件
@@ -53,10 +56,42 @@ MIDDLEWARE = [  # 中间件
 ROOT_URLCONF = 'DjangoFirstProject.urls'  # 所有路由的根路由
 
 TEMPLATES = [   # 静态文件的配置
+    # 单独配置 jinja2 的模板
+    # {
+    #     'BACKEND': 'django.template.backends.jinja2.Jinja2', # 替换掉模板引擎为jinja2
+    #     # 定义模板的位置 类似于 /usr/xxx/projectname/templates
+    #     'DIRS': [os.path.join(BASE_DIR, 'jinja2-templates')],
+    #     'APP_DIRS': True,
+    #     'OPTIONS': {
+    #         'context_processors': [
+    #             'django.template.context_processors.debug',
+    #             'django.template.context_processors.request',
+    #             'django.contrib.auth.context_processors.auth',
+    #             'django.contrib.messages.context_processors.messages',
+    #         ],
+    #         'environment': 'jinja2app.base_jinja2.environment'  # 配置环境变量
+    #     },
+    # },
+    # 单独配置 django 的模板
+    # {
+    #     'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    #     # 定义模板的位置 类似于 /usr/xxx/projectname/templates
+    #     'DIRS': [os.path.join(BASE_DIR, 'templates')],
+    #     'APP_DIRS': True,
+    #     'OPTIONS': {
+    #         'context_processors': [
+    #             'django.template.context_processors.debug',
+    #             'django.template.context_processors.request',
+    #             'django.contrib.auth.context_processors.auth',
+    #             'django.contrib.messages.context_processors.messages',
+    #         ],
+    #     },
+    # },
+    # 单独配置 mako 的模板
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 定义模板的位置 类似于 /usr/xxx/projectname/templates
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'mako-templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,3 +155,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# 配置静态文件路径
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
