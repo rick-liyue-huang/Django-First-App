@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',  # 信息功能
     'django.contrib.staticfiles',  # 静态资源 比如 CSS
     # 'app',  # 注册自定义创建的应用
-    'jinja2app', # 注册 jinja2 应用
-    'makoapp', # 注册 mako 应用
-    'templateEnumMessageApp',
-    'templateEnumMessageApp.templatetags'  # 加入自定义filter
+    # 'jinja2app', # 注册 jinja2 应用
+    # 'makoapp', # 注册 mako 应用
+    # 'templateEnumMessageApp',
+    # 'templateEnumMessageApp.templatetags',  # 加入自定义filter
+    'modelApp'
 ]
 
 MIDDLEWARE = [  # 中间件
@@ -128,8 +129,12 @@ WSGI_APPLICATION = 'DjangoFirstProject.wsgi.application'
 
 DATABASES = {  # 定义数据库的
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'trymodels',
+        'USER': 'root',
+        'PASSWORD': 'rootroot666',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
