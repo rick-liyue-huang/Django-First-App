@@ -342,3 +342,4 @@ user.diary.count() # 返回id为1用户的diary关联数量，user.diary就是Di
 
 #### 第三方ORM SQLAlchemy
 
+SQLAlchemy是Python社区最知名的orm工具之一，为了高效和高性能的数据库访问设计，实现了完整的企业级持久模型，他可以搭配在任何一个python的web框架中，其中比较出名的是flask。常用的基础模块包括declarative_base 初始化sql与模块化的基础模块，`Base=declarative_base()`; create_engine 数据库引擎，连接数据库 `engine = create_engine('mysql+pymysql://root:@localhost:3306/sqlalchemy_test')`; sessionmake 数据插入查询的模块 `db_session=sessionmaker(bind=engine)()`。
